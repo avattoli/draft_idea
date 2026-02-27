@@ -23,7 +23,7 @@ Example:
 - **FAISS** (vector similarity search)
 
 ### Frontend
-- **React** (upload UI + search + video player jump-to-time)
+- **React** 
 
 ---
 
@@ -33,10 +33,6 @@ Each video is split into chunks. Each chunk stores:
 - `chunk_id`
 - `video_id`
 - `start_time`, `end_time`
-- `transcript_text`
-- `frame_paths` (or frame ids)
-- `text_embedding` (vector)
-- `image_embedding` (vector; usually an aggregate over frames)
 
 ---
 
@@ -55,10 +51,9 @@ Each chunk becomes:
 
 ### 3) Extract chunk info
 
-#### 3.1 Transcript (audio → text)
 For each chunk:
 - Extract chunk audio with FFmpeg
-- Transcribe using **faster-whisper**
+- Transcribe using faster-whisper
 - Save transcript to the chunk record
 
 #### 3.2 Frames (video → images)
@@ -68,7 +63,7 @@ For each chunk:
 - Save sampled frames (paths or ids)
 
 > Simple implementation: sample frames uniformly.  
-> Better later: “keyframe” extraction or scene-change detection (optional).
+> Better later: could find a way to include the most relevant frames within a second
 
 ---
 
@@ -86,12 +81,9 @@ So:
 
 #### 4.1 Text embedding
 - Embed `transcript_text` using OpenCLIP **text encoder**
-- Result: `text_vec[dim]`
 
 #### 4.2 Image embedding
 - Embed each sampled frame using OpenCLIP **image encoder**
-- Aggregate into one vector for the chunk (simple):
-  - `image_vec = mean(frame_vecs)`
 
 Store:
 - `text_vec`
@@ -131,19 +123,6 @@ Merge the two results by score:
 Return top-K chunks:
 - `(video_id, start_time, end_time, score, transcript_snippet)`
 
----
-
-## Output
-Frontend shows results:
-- list of timestamps
-- clicking result jumps video player to `start_time`
-
----
-
-## Notes / Fixes vs the initial message
-- Text embeddings should be created with **OpenCLIP** if you want to compare to frames.
-- You generally don’t store *all* frames; you sample frames to control cost.
-- Query should retrieve from text index and (optionally) image index, then merge.
 
 ---
 
