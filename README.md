@@ -3,8 +3,12 @@
 ## Goal
 Upload a video, then search it with a text prompt to return the most relevant **segments (timestamps)**.
 
-Example prompt: “when they explain gradient descent”  
-Output: top matching segments like `12:30–13:00`, `27:10–27:40`, etc.
+Example: 
+1) Upload a video taken at the zoo
+2) Enter the prompt: Giraffe
+3) Find all clips within that video that match a giraffe
+
+
 
 ---
 
