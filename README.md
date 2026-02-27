@@ -1,4 +1,4 @@
-# Video Segment Search (Prompt → Matching Timestamps)
+# Video Segment Search
 
 ## Goal
 Upload a video, then search it with a text prompt to return the most relevant **segments (timestamps)**.
