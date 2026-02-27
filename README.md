@@ -102,3 +102,38 @@ Create two indices:
 User enters prompt text.
 
 #### 6.1 Embed query
+q_vec = OpenCLIP_text_encoder(prompt)
+
+#### 6.2 Retrieve
+
+- Search `faiss_image_index` using `q_vec`
+- Get top-N matching frames (timestamps)
+
+(Optional)
+- Search `faiss_text_index` for transcript matches
+
+#### 6.3 Convert frames → clips
+
+- Sort retrieved frame timestamps
+- Merge nearby timestamps (e.g., within 5–10 seconds)
+- Convert merged ranges into clips:
+  - `(video_id, start_time, end_time)`
+
+Return top-K clips.
+
+---
+
+## Output
+
+Frontend shows:
+- List of matching clips
+- Clicking a clip jumps video player to `start_time`
+
+---
+
+## Next Improvements (Optional)
+
+- Keyframe or scene-change detection instead of uniform sampling
+- Score fusion between transcript + frame results
+- Reranking step on top-N candidates
+- Evaluation dataset + metrics (Recall@K)
