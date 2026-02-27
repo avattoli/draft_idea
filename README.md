@@ -1,7 +1,7 @@
 # Video Segment Search
 
 ## Goal
-Upload a video, then search it with a text prompt to return the most relevant **segments (timestamps)**.
+Upload a video, then search it with a text prompt to return the most relevant clips
 
 Example: 
 1) Upload a video taken at the zoo
