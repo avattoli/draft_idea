@@ -129,11 +129,4 @@ Frontend shows:
 - List of matching clips
 - Clicking a clip jumps video player to `start_time`
 
----
 
-## Next Improvements (Optional)
-
-- Keyframe or scene-change detection instead of uniform sampling
-- Score fusion between transcript + frame results
-- Reranking step on top-N candidates
-- Evaluation dataset + metrics (Recall@K)
